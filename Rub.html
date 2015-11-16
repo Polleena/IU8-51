@@ -1,0 +1,75 @@
+<html>
+<head/>
+<body>
+<p> Задание на РК</p>
+<p>1. Построить отрезок прямой алгоритмом Брезенхема. Отрезок имеет координаты:
+А(20,10) B(20+i,100);</p>
+<p> i - номер в журнале (мой вариант - 4)</p>
+
+<canvas id='rk' width='320' height='120'>
+	<script>
+		var canvas = document.getElementById('rk'); 
+		var ctx = canvas.getContext('2d');
+			var delta=0;
+			var x=20;
+				for (i=10; i<100; i++)
+				{	if (delta>=5) {	
+						x+=0.3;
+						delta-=22.5; 			
+				}								
+				delta+=11.25;
+				ctx.fillRect(x,i,1,1);	
+				}
+	 ctx.restore;
+	</script>
+</canvas>
+
+<p> 2. Дан массив х-координат границ многоугольника(задается в коде, например arr[10,14,15,20])</p>
+<p> Отобразить в графической области совокупность горизонтальных отрезков,
+осуществляющих заливку данного элемента многоугольника.</p>
+<p> Заливка осуществляется от четного элемента (или 0) до нечетного включительно.</p> 
+<p> Учесть, что повторяющиеся элементы должны продолжаться до пропуска(группируются).</p>
+<canvas id="canvas2" height="400" width="600"></canvas>
+	<script>
+		var canva = document.getElementById("canvas2");
+		var canv = canva.getContext("2d");
+
+		var array=[		[10, 30, 51, 60, 101, 105,113, 116, 120],
+						[10, 11, 12, 13, 14,15,16,17,18,19,20, 25, 30, 51, 80,101]
+					];
+		var nn=0;
+		var mm=0;
+		var ptr=0;
+for (var row=0; row<array.length; row++) {
+		nn=0;
+		mm=0;
+		ptr=0;
+		for (var i=0; i<array[row].length-1; i++){
+			if (array[row][i] % 2 == 0)
+			{
+				mm = i+1;
+				ptr = mm--;
+				while (array[row][mm]-array[row][ptr] == 1)
+				{
+					mm++;
+					ptr++;
+				}
+				nn = mm+1;
+				while (array[row][nn] % 2 == 0)
+				{
+					nn++;
+
+				}
+				for (var j = array[row][i]; j<=array[row][nn]; j++)
+				{
+					canv.fillRect(j, row, 1, 1);
+				}
+			}
+
+		}
+	}
+	</script>
+
+
+</body>
+</html>
